@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginPic from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -19,14 +20,17 @@ const Login = () => {
     console.log(email, password);
 
     loginUser(email, password)
-    .then(res => {
-      const loggedUser = res.user;
-      console.log(loggedUser)
-      navigate(from, { replace: true });
-    })
-    .catch(error => {
-      console.log(error.message)
-    })
+      .then((res) => {
+        const user = res.user;
+        
+        console.log(user);
+        navigate(from, { replace: true });
+
+        
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="hero py-20 rounded-lg bg-base-200 my-20">
@@ -79,6 +83,7 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>
